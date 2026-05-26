@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Sistemi di Accordatura</title>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      width: 800px;
+      background: transparent;
+      font-family: Helvetica, Arial, sans-serif;
+      overflow: hidden;
+    }
+    
+    /* Perfettamente allineato all'interfaccia principale (40px) */
+    #options-container {
+      width: 800px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding-left: 40px;
+      padding-right: 40px;
+    }
+    
+    #canvas-holder {
+      width: 800px;
+      height: 480px;
+      background: #fff;
+      border: 1px solid #000;
+      position: relative;
+    }
+    canvas {
+      display: block;
+    }
+    
+    #sliders-container {
+      width: 800px;
+      padding-top: 16px;
+      padding-left: 40px;
+      padding-right: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    
+    .p5-radio-wrapper {
+      display: flex;
+      gap: 20px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #000;
+    }
+    .p5-radio-wrapper label {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    input[type="radio"] {
+      appearance: none;
+      width: 14px;
+      height: 14px;
+      border: 1px solid #000;
+      border-radius: 50%;
+      outline: none;
+      position: relative;
+      cursor: pointer;
+    }
+    input[type="radio"]:checked::before {
+      content: '';
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: #000;
+      border-radius: 50%;
+      top: 2px;
+      left: 2px;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/addons/p5.sound.min.js"></script>
+</head>
+<body>
+  <div id="options-container"></div>
+  <div id="canvas-holder"></div>
+  <div id="sliders-container"></div>
+  <script src="sketch.js"></script>
+</body>
+</html>

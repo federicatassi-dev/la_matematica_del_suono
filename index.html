@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>La Matematica del Suono</title>
+  <style>
+    /* ── Reset & Typography (Swiss Minimalist) ────────── */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Helvetica, Arial, sans-serif;
+      color: #000;
+      background-color: #fcfcfc; /* Off-white molto leggero ed editoriale */
+      /*/background-image: url('sfondovettoriale.svg');
+      background-repeat: repeat;
+      background-attachment: fixed;
+      background-size: 595.27px 420.94px;
+      line-height: 1.45;
+      letter-spacing: -0.01em; */
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    /* ── Grid Layout Core (Tim Tijink Inspired) ────────── */
+    .grid-container {
+      width: 100%;
+      max-width: 1360px;
+      margin: 0 auto;
+      border-left: 1px solid #000;
+      border-right: 1px solid #000;
+      background: rgba(252, 252, 252, 0.96); /* Sottile trasparenza per far respirare lo sfondo */
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Header ────────────────────────────────────────── */
+    .main-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid #000;
+    }
+
+    .header-col {
+      padding: 40px;
+    }
+
+    .header-col:first-child {
+      border-right: 1px solid #000;
+    }
+
+    .logo-text {
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      text-transform: none;
+    }
+
+    .header-desc {
+      font-size: 1.05rem;
+      color: #444;
+      line-height: 1.65 !important;
+      max-width: 500px;
+    }
+
+    /* ── SPA PAGE VIEWS ────────────────────────────────── */
+    .page-view {
+      display: none;
+      flex-grow: 1;
+    }
+
+    .page-view.active {
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── VIEW 1: INDEX PAGE (Tijink Portfolio Grid) ───── */
+    .index-table-header {
+      display: grid;
+      grid-template-columns: 80px 2fr 3fr 1.5fr;
+      border-bottom: 1px solid #000;
+      background: #000;
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .index-table-header div {
+      padding: 12px 20px;
+    }
+
+    .index-table-header div:not(:last-child) {
+      border-right: 1px solid #fff;
+    }
+
+    .index-row {
+      display: grid;
+      grid-template-columns: 80px 2fr 3fr 1.5fr;
+      border-bottom: 1px solid #000;
+      transition: background-color 0.15s;
+    }
+
+    .index-row:hover {
+      background-color: #f0f0f0;
+    }
+
+    .index-cell {
+      padding: 24px 20px;
+      font-size: 0.95rem;
+      align-self: center;
+    }
+
+    .index-cell:not(:last-child) {
+      border-right: 1px solid #000;
+    }
+
+    .index-cell.num {
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    .index-cell.title {
+      font-weight: 700;
+      font-size: 1.2rem;
+      letter-spacing: -0.02em;
+    }
+
+    .index-cell.formula {
+      font-family: monospace;
+      color: #333;
+      font-size: 0.9rem;
+    }
+
+    .index-cell.action a {
+      color: #000;
+      text-decoration: none;
+      font-weight: 700;
+      display: inline-block;
+      transition: transform 0.2s;
+    }
+
+    .index-cell.action a:hover {
+      transform: translateX(6px);
+    }
+
+    /* ── VIEW 2: TOOL DETAIL PAGE ──────────────────────── */
+    .tool-navbar {
+      display: grid;
+      grid-template-columns: 280px 1fr 280px;
+      border-bottom: 1px solid #000;
+      background: #fff;
+      height: 64px;
+    }
+
+    .nav-btn {
+      display: flex;
+      align-items: center;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #000;
+      text-decoration: none;
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.15s;
+      position: relative;
+    }
+
+    .nav-btn:hover {
+      background-color: #f0f0f0;
+    }
+
+    .nav-btn.back-btn {
+      border-right: 1px solid #000;
+      padding-left: 40px; /* Testo allineato a 40px come l'header principale */
+      justify-content: flex-start;
+    }
+
+    .nav-btn.back-btn .arrow-icon {
+      position: absolute;
+      left: 15px; /* Freccia all'esterno */
+    }
+
+    .nav-title {
+      align-self: center;
+      text-align: center;
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-btn.next-btn {
+      border-left: 1px solid #000;
+      padding-right: 40px; /* Testo allineato a 40px dal bordo destro */
+      justify-content: flex-end;
+    }
+
+    .nav-btn.next-btn .arrow-icon {
+      position: absolute;
+      right: 15px; /* Freccia all'esterno */
+    }
+
+    /* Grid del Modulo Attivo */
+    .tool-layout-grid {
+      display: grid;
+      grid-template-columns: 800px 1fr;
+      flex-grow: 1;
+    }
+
+    .tool-left-col {
+      width: 800px;
+      border-right: 1px solid #000;
+      background: transparent;
+    }
+
+    .tool-iframe-container {
+      width: 100%;
+      height: 660px; /* Altezza ottimizzata per evitare scrollbar interne */
+    }
+
+    .tool-iframe-container iframe {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: transparent;
+    }
+
+    .tool-right-col {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .tool-box {
+      padding: 32px 40px; /* Padded to 40px to match left alignment */
+      background: #fff;
+    }
+
+    .tool-box:first-child {
+      border-bottom: 1px solid #000;
+      flex-grow: 1;
+    }
+
+    .tool-box-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+
+    .tool-box-formula {
+      font-family: monospace;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #000;
+      margin-bottom: 20px;
+      padding: 10px;
+      background: #f4f4f4;
+      border-left: 3px solid #000;
+    }
+
+    .tool-box-desc {
+      font-size: 0.95rem;
+      color: #333;
+      line-height: 1.65 !important;
+    }
+
+    .tool-params-box {
+      padding: 24px 40px;
+      background: #fff;
+      border-top: 1px solid #000;
+      min-height: 240px;
+    }
+
+    .tool-params-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #666;
+      margin-bottom: 16px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 6px;
+    }
+
+    .tool-params-content {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* Stili per il contenuto iniettato via postMessage */
+    .param-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      line-height: 1.4;
+    }
+
+    .param-label {
+      font-weight: 400;
+      color: #444;
+    }
+
+    .param-value {
+      font-weight: 700;
+      color: #000;
+      text-align: right;
+    }
+
+    /* Footer di chiusura griglia */
+    .main-footer {
+      border-top: 1px solid #000;
+      padding: 20px 40px;
+      font-size: 0.8rem;
+      color: #666;
+      text-align: center;
+      background: #fff;
+    }
+
+    /* ── Responsive ────────────────────────────────────── */
+    @media (max-width: 1240px) {
+      .tool-layout-grid {
+        grid-template-columns: 1fr;
+      }
+      .tool-left-col {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #000;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="grid-container">
+    
+    <!-- Header -->
+    <header class="main-header">
+      <div class="header-col">
+        <h1 class="logo-text">Matematica e suono</h1>
+      </div>
+      <div class="header-col">
+        <p class="header-desc">Esplorazione interattiva dei modelli fisici e matematici sottostanti alla teoria musicale e all'acustica.</p>
+      </div>
+    </header>
+
+    <!-- VIEW 1: HOME/INDEX SPA -->
+    <div id="index-view" class="page-view active">
+      <div class="index-table-header">
+        <div>N°</div>
+        <div>Strumento</div>
+        <div>Modello / Formula</div>
+        <div>Naviga</div>
+      </div>
+      <div id="index-rows-container">
+        <!-- Generato dinamicamente da main.js -->
+      </div>
+    </div>
+
+    <!-- VIEW 2: TOOL DETAIL SPA -->
+    <div id="tool-view" class="page-view">
+      <nav class="tool-navbar">
+        <div id="btn-nav-prev" class="nav-btn back-btn">&larr; Precedente</div>
+        <div id="nav-tool-title" class="nav-title">Nome Strumento</div>
+        <div id="btn-nav-next" class="nav-btn next-btn">Successivo &rarr;</div>
+      </nav>
+
+      <div class="tool-layout-grid">
+        <!-- Colonna sinistra: Iframe dello strumento attivo -->
+        <div class="tool-left-col">
+          <div class="tool-iframe-container">
+            <iframe id="tool-iframe" src="" allowTransparency="true"></iframe>
+          </div>
+        </div>
+
+        <!-- Colonna destra: Informazioni e Parametri in tempo reale -->
+        <div class="tool-right-col">
+          <div class="tool-box">
+            <h2 id="tool-info-title" class="tool-box-title">Titolo Strumento</h2>
+            <div id="tool-info-formula" class="tool-box-formula">formula</div>
+            <p id="tool-info-desc" class="tool-box-desc">Descrizione</p>
+          </div>
+          <div class="tool-params-box">
+            <div class="tool-params-title">Pannello Parametri</div>
+            <div id="tool-params-content" class="tool-params-content">
+              <div class="param-row"><span class="param-label" style="font-style: italic;">In attesa di interazione...</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+      Matematica per il design 2026 &ndash; ISIA Urbino
+    </footer>
+
+  </div>
+
+  <script src="main.js"></script>
+
+  <!-- Comunicazione postMessage dagli iframe della SPA -->
+  <script>
+    window.addEventListener('message', function(e) {
+      if (e.data && e.data.type === 'params') {
+        var paramsDiv = document.getElementById('tool-params-content');
+        if (paramsDiv) {
+          paramsDiv.innerHTML = e.data.html || '';
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>
