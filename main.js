@@ -5,6 +5,7 @@
 (function () {
   'use strict';
 
+  
   var modules = [
     {
       id: 'accordatura',
