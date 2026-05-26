@@ -154,10 +154,10 @@ function updateParentParams() {
   let battimento = abs(f1 - f2);
 
   let html = `
-    <div class="param-row"><span class="param-label">Frequenza 1 (f₁):</span><span class="param-value">${f1} Hz</span></div>
-    <div class="param-row"><span class="param-label">Frequenza 2 (f₂):</span><span class="param-value">${f2} Hz</span></div>
-    <div class="param-row"><span class="param-label">Media (Portante):</span><span class="param-value">${media.toFixed(1)} Hz</span></div>
-    <div class="param-row"><span class="param-label" style="color:#c33;">Battimenti al sec:</span><span class="param-value" style="color:#c33;">${battimento} Hz</span></div>
+    <div class="param-row"><span class="param-label" style="color:rgb(40, 100, 220);">Frequenza 1 (f₁):</span><span class="param-value" style="color:rgb(40, 100, 220);">${f1} Hz</span></div>
+    <div class="param-row"><span class="param-label" style="color:rgb(220, 40, 40);">Frequenza 2 (f₂):</span><span class="param-value" style="color:rgb(220, 40, 40);">${f2} Hz</span></div>
+    <div class="param-row"><span class="param-label" style="color:#000;">Media (Portante):</span><span class="param-value" style="color:#000;">${media.toFixed(1)} Hz</span></div>
+    <div class="param-row"><span class="param-label" style="color:rgb(0, 150, 80);">Battimenti al sec:</span><span class="param-value" style="color:rgb(0, 150, 80);">${battimento} Hz</span></div>
     <div class="param-row" style="margin-top:10px;"><span class="param-label">Formula Dinamica:</span><span class="param-value" style="font-weight:normal;font-family:monospace;">2·sin(${media.toFixed(1)}·2π·t)·cos(${battimento}·π·t)</span></div>
   `;
 

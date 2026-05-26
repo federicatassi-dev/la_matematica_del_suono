@@ -240,8 +240,8 @@ function updateParentParams(r, d, a, n) {
     <div class="param-row"><span class="param-label">Frequenza Base:</span><span class="param-value">${baseFreq} Hz (Do₄)</span></div>
     <div class="param-row"><span class="param-label">Numero Parziali:</span><span class="param-value">${n}</span></div>
     <div class="param-row"><span class="param-label">Fattore Spread (a):</span><span class="param-value">${nf(a, 1, 2)}</span></div>
-    <div class="param-row" style="margin-top:10px;"><span class="param-label" style="color:#c33;">Rapporto Cursore:</span><span class="param-value" style="color:#c33;">${nf(r, 1, 4)} (${nf(baseFreq * r, 1, 1)} Hz)</span></div>
-    <div class="param-row"><span class="param-label" style="color:#c33;">Dissonanza Locale:</span><span class="param-value" style="color:#c33;">${nf(d, 1, 2)}</span></div>
+    <div class="param-row" style="margin-top:10px;"><span class="param-label" style="color:rgb(220, 40, 40);">Rapporto Cursore:</span><span class="param-value" style="color:rgb(220, 40, 40);">${nf(r, 1, 4)} (${nf(baseFreq * r, 1, 1)} Hz)</span></div>
+    <div class="param-row"><span class="param-label" style="color:rgb(40, 100, 220);">Dissonanza Locale:</span><span class="param-value" style="color:rgb(40, 100, 220);">${nf(d, 1, 2)}</span></div>
   `;
 
   if (html !== lastSentHTML) {

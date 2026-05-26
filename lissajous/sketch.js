@@ -194,7 +194,7 @@ function updateParentParams() {
 
   let html = `
     <div class="param-row"><span class="param-label">Stato Audio:</span><span class="param-value">${audioStatus}</span></div>
-    <div class="param-row"><span class="param-label">Rapporto Fx:Fy:</span><span class="param-value">${rA}:${rB}</span></div>
+    <div class="param-row"><span class="param-label" style="color:rgb(40, 100, 220);">Rapporto Fx:Fy:</span><span class="param-value" style="color:rgb(40, 100, 220);">${rA}:${rB}</span></div>
     <div class="param-row"><span class="param-label">Freq. Canale Sx:</span><span class="param-value">${(baseAud * fx).toFixed(0)} Hz</span></div>
     <div class="param-row"><span class="param-label">Freq. Canale Dx:</span><span class="param-value">${(baseAud * fy).toFixed(0)} Hz</span></div>
     <div class="param-row"><span class="param-label">Modulazione X:</span><span class="param-value">${nf(mx, 1, 2)}</span></div>

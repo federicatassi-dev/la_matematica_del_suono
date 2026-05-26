@@ -172,11 +172,13 @@ function updateParentParams() {
   let freqStr = activeKey >= 0 ? selectedFreq.toFixed(2) + ' Hz' : '&mdash;';
   let formStr = activeKey >= 0 ? selectedFormula : '&mdash;';
 
+  let activeColor = activeKey >= 0 ? 'rgb(40, 100, 220)' : '#000';
+
   let html = `
     <div class="param-row"><span class="param-label">Modello Attivo:</span><span class="param-value">${mode}</span></div>
     <div class="param-row"><span class="param-label">Frequenza Base:</span><span class="param-value">${BASE_FREQ.toFixed(2)} Hz</span></div>
-    <div class="param-row"><span class="param-label">Nota Selezionata:</span><span class="param-value">${noteStr}</span></div>
-    <div class="param-row"><span class="param-label">Frequenza Calcolata:</span><span class="param-value">${freqStr}</span></div>
+    <div class="param-row"><span class="param-label" style="color:${activeColor};">Nota Selezionata:</span><span class="param-value" style="color:${activeColor};">${noteStr}</span></div>
+    <div class="param-row"><span class="param-label" style="color:${activeColor};">Frequenza Calcolata:</span><span class="param-value" style="color:${activeColor};">${freqStr}</span></div>
     <div class="param-row"><span class="param-label">Formula:</span><span class="param-value" style="font-weight:normal;font-family:monospace;">${formStr}</span></div>
   `;
 

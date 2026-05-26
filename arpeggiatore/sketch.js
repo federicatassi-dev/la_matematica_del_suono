@@ -191,26 +191,49 @@ function draw() {
   }
   textStyle(NORMAL);
 
-  // Draw Live Mathematical Ratio Above Active Step Box
-  if (playing && numNotes > 0) {
-    let activeN = chordIntervals[currentStep];
-    let ratioVal = pow(2, activeN / 12);
-    let activeX = rectStartX + currentStep * (rectW + gap) + rectW/2;
-    
-    // Draw connecting line and pointer
-    stroke(220, 40, 40);
-    strokeWeight(1);
-    line(activeX, waveCenterY + waveH/2, activeX, rectY - 15);
-    
-    fill(220, 40, 40);
-    noStroke();
-    ellipse(activeX, rectY - 15, 6, 6);
-    
-    // Typographical label of the ratio
+  // Draw Intervals Between Steps
+  if (numNotes > 1) {
     textAlign(CENTER, BOTTOM);
-    textSize(11);
-    textStyle(BOLD);
-    text("n: " + activeN + " | " + ratioVal.toFixed(4) + "x", activeX, rectY - 20);
+    textSize(10);
+    for (let i = 0; i < numNotes - 1; i++) {
+      let x1 = rectStartX + i * (rectW + gap) + rectW / 2;
+      let x2 = rectStartX + (i + 1) * (rectW + gap) + rectW / 2;
+      let y = rectY - 8;
+      
+      let isActiveTransition = playing && (currentStep === i + 1);
+      
+      if (isActiveTransition) {
+        stroke(40, 100, 220);
+        strokeWeight(2);
+      } else {
+        stroke(200);
+        strokeWeight(1);
+      }
+      
+      noFill();
+      beginShape();
+      vertex(x1, y);
+      vertex(x1, y - 10);
+      vertex(x2, y - 10);
+      vertex(x2, y);
+      endShape();
+      
+      let diff = chordIntervals[i+1] - chordIntervals[i];
+      let diffStr = (diff >= 0 ? "+" : "") + diff;
+      
+      noStroke();
+      if (isActiveTransition) {
+        fill(40, 100, 220);
+        textStyle(BOLD);
+      } else {
+        fill(150);
+        textStyle(NORMAL);
+      }
+      
+      if (rectW >= 15 || isActiveTransition) {
+        text(diffStr, (x1 + x2) / 2, y - 12);
+      }
+    }
     textStyle(NORMAL);
   }
 
@@ -272,8 +295,8 @@ function updateParentParams() {
     <div class="param-row"><span class="param-label">Forma d'onda:</span><span class="param-value">${waveType}</span></div>
     <div class="param-row"><span class="param-label">Tempo Arpeggio:</span><span class="param-value">${tempo} ms</span></div>
     <div class="param-row" style="margin-top:8px; border-top:1px solid #000; padding-top:8px;"><span class="param-label" style="color:#000; font-weight:700;">Nota Attiva (Semitoni):</span><span class="param-value" style="color:#000;">${activeNoteStr}</span></div>
-    <div class="param-row"><span class="param-label" style="color:#c33; font-weight:700;">Rapporto Frequenza:</span><span class="param-value" style="color:#c33;">${activeRatioStr}</span></div>
-    <div class="param-row"><span class="param-label" style="color:#000; font-weight:700;">Frequenza Calcolata:</span><span class="param-value" style="color:#000;">${playing ? currentFreq.toFixed(2) : '--'} Hz</span></div>
+    <div class="param-row"><span class="param-label" style="color:rgb(40, 100, 220); font-weight:700;">Rapporto Frequenza:</span><span class="param-value" style="color:rgb(40, 100, 220);">${activeRatioStr}</span></div>
+    <div class="param-row"><span class="param-label" style="color:rgb(40, 100, 220); font-weight:700;">Frequenza Calcolata:</span><span class="param-value" style="color:rgb(40, 100, 220);">${playing ? currentFreq.toFixed(2) : '--'} Hz</span></div>
   `;
 
   if (html !== lastSentHTML) {

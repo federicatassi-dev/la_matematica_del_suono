@@ -1,2 +1,0 @@
-# La matematica del suono
-#
