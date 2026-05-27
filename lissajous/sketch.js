@@ -53,16 +53,14 @@ function setup() {
   btnAnim.style('background', '#000');
   btnAnim.style('color', '#fff');
 
+  // Go to new line before presets
+  createDiv('').style('width', '100%').style('height', '0').parent('options-container');
+
   // Preset Buttons
   btnUnisono = createButton('1:1 unisono').parent('options-container');
   btnOttava = createButton('2:1 ottava').parent('options-container');
   btnQuinta = createButton('3:2 quinta').parent('options-container');
   btnTerza  = createButton('5:4 terza mag').parent('options-container');
-  
-  // Go to new line after 5:4 button
-  createDiv('').style('width', '100%').style('height', '0').parent('options-container');
-  
-  // Add Quinta Mag button on new line
   btnQuintaMag = createButton('8:5 quinta mag').parent('options-container');
 
   btnUnisono.mousePressed(() => setPreset(1, 1));
