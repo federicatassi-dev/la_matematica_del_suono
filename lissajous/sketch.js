@@ -34,14 +34,14 @@ function setup() {
   oscY.start();
 
   // Audio Toggle Button
-  btnAudio = createButton('▶  Avvia Audio').parent('options-container');
+  btnAudio = createButton('▶  Avvia audio').parent('options-container');
   btnAudio.mousePressed(toggleAudio);
 
   // Animation Toggle Button
-  btnAnim = createButton('■  Ferma Animazione').parent('options-container');
+  btnAnim = createButton('■  Ferma animazione').parent('options-container');
   btnAnim.mousePressed(() => {
     isAnimating = !isAnimating;
-    btnAnim.html(isAnimating ? '■  Ferma Animazione' : '▶  Anima');
+    btnAnim.html(isAnimating ? '■  Ferma animazione' : '▶  Anima');
     if (isAnimating) {
       btnAnim.style('background', '#000');
       btnAnim.style('color', '#fff');
@@ -54,15 +54,22 @@ function setup() {
   btnAnim.style('color', '#fff');
 
   // Preset Buttons
-  btnUnisono = createButton('1:1 Unisono').parent('options-container');
-  btnOttava = createButton('2:1 Ottava').parent('options-container');
-  btnQuinta = createButton('3:2 Quinta').parent('options-container');
-  btnTerza  = createButton('5:4 Terza Mag').parent('options-container');
+  btnUnisono = createButton('1:1 unisono').parent('options-container');
+  btnOttava = createButton('2:1 ottava').parent('options-container');
+  btnQuinta = createButton('3:2 quinta').parent('options-container');
+  btnTerza  = createButton('5:4 terza mag').parent('options-container');
+  
+  // Go to new line after 5:4 button
+  createDiv('').style('width', '100%').style('height', '0').parent('options-container');
+  
+  // Add Quinta Mag button on new line
+  btnQuintaMag = createButton('8:5 quinta mag').parent('options-container');
 
   btnUnisono.mousePressed(() => setPreset(1, 1));
   btnOttava.mousePressed(()  => setPreset(2, 1));
   btnQuinta.mousePressed(()  => setPreset(3, 2));
   btnTerza.mousePressed(()   => setPreset(5, 4));
+  btnQuintaMag.mousePressed(() => setPreset(8, 5));
 
   // --- Grid 2x2 of Sliders ---
   // Row 1 (Fx, Fy)
@@ -102,14 +109,14 @@ function toggleAudio() {
     isAudioPlaying = true;
     oscX.amp(0.2, 0.05);
     oscY.amp(0.2, 0.05);
-    btnAudio.html('■  Ferma Audio');
+    btnAudio.html('■  Ferma audio');
     btnAudio.style('background', '#000');
     btnAudio.style('color', '#fff');
   } else {
     isAudioPlaying = false;
     oscX.amp(0, 0.1);
     oscY.amp(0, 0.1);
-    btnAudio.html('▶  Avvia Audio');
+    btnAudio.html('▶  Avvia audio');
     btnAudio.style('background', '#fff');
     btnAudio.style('color', '#000');
   }
@@ -189,8 +196,8 @@ function updateParentParams() {
   let rA = round(fx * 10) / g;
   let rB = round(fy * 10) / g;
   
-  let stato = (mx === 0 && my === 0) ? "Chiusa (Consonante)" : "Modulata (Dissonante)";
-  let audioStatus = isAudioPlaying ? "<span style='color:#0a0;font-weight:bold;'>ATTIVO (Stereo)</span>" : "<span style='color:#777;'>SPENTO</span>";
+  let stato = (mx === 0 && my === 0) ? "chiusa (consonante)" : "modulata (dissonante)";
+  let audioStatus = isAudioPlaying ? "<span style='color:#0a0;font-weight:bold;'>attivo (stereo)</span>" : "<span style='color:#777;'>spento</span>";
 
   let html = `
     <div class="param-row"><span class="param-label">Stato Audio:</span><span class="param-value">${audioStatus}</span></div>

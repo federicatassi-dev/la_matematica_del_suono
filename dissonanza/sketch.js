@@ -17,8 +17,8 @@ let lastSentHTML = '';
 
 const consonances = [
   { name: 'Unisono',    ratio: 1/1 },
-  { name: 'III min',    ratio: 6/5 },
-  { name: 'III Mag',    ratio: 5/4 },
+  { name: 'Terza min',  ratio: 6/5 },
+  { name: 'Terza mag',  ratio: 5/4 },
   { name: 'Quarta',     ratio: 4/3 },
   { name: 'Quinta',     ratio: 3/2 },
   { name: 'Ottava',     ratio: 2/1 }
@@ -78,7 +78,7 @@ function setup() {
   oscB.start();
 
   // Audio Toggle Button (Top Left)
-  btnAudio = createButton('▶  Avvia Audio');
+  btnAudio = createButton('▶  Avvia audio');
   btnAudio.parent('options-container');
   btnAudio.mousePressed(toggleAudio);
 
@@ -118,14 +118,14 @@ function toggleAudio() {
     isAudioPlaying = true;
     oscA.amp(0.25, 0.05);
     oscB.amp(0.25, 0.05);
-    btnAudio.html('■  Ferma Audio');
+    btnAudio.html('■  Ferma audio');
     btnAudio.style('background', '#000');
     btnAudio.style('color', '#fff');
   } else {
     isAudioPlaying = false;
     oscA.amp(0, 0.1);
     oscB.amp(0, 0.1);
-    btnAudio.html('▶  Avvia Audio');
+    btnAudio.html('▶  Avvia audio');
     btnAudio.style('background', '#fff');
     btnAudio.style('color', '#000');
   }
@@ -233,7 +233,7 @@ function draw() {
 function updateParentParams(r, d, a, n) {
   if(r === undefined) return;
   
-  let audioStatus = isAudioPlaying ? "<span style='color:#0a0;font-weight:bold;'>ATTIVO</span>" : "<span style='color:#777;'>SPENTO</span>";
+  let audioStatus = isAudioPlaying ? "<span style='color:#0a0;font-weight:bold;'>attivo</span>" : "<span style='color:#777;'>spento</span>";
 
   let html = `
     <div class="param-row"><span class="param-label">Stato Audio:</span><span class="param-value">${audioStatus}</span></div>

@@ -17,7 +17,7 @@ function setup() {
   textFont('Helvetica');
 
   // Toggle button
-  btnToggle = createButton('▶  Avvia Audio');
+  btnToggle = createButton('▶  Avvia audio');
   btnToggle.parent('options-container');
   btnToggle.mousePressed(toggleAudio);
 
@@ -51,14 +51,14 @@ function toggleAudio() {
     osc1.start();
     osc2.start();
     isPlaying = true;
-    btnToggle.html('⏹  Ferma Audio');
+    btnToggle.html('⏹  Ferma audio');
     btnToggle.style('background', '#222');
     btnToggle.style('color', '#fff');
   } else {
     osc1.stop();
     osc2.stop();
     isPlaying = false;
-    btnToggle.html('▶  Avvia Audio');
+    btnToggle.html('▶  Avvia audio');
     btnToggle.style('background', '#fff');
     btnToggle.style('color', '#000');
   }
