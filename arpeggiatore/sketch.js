@@ -46,7 +46,7 @@ function setup() {
   fft.setInput(osc);
 
   // Play/Stop Button
-  toggleBtn = createButton('▶ START').parent('options-container');
+  toggleBtn = createButton('▶ Start').parent('options-container');
   toggleBtn.mousePressed(togglePlay);
 
   // Presets Dropdown
@@ -256,13 +256,13 @@ function togglePlay() {
     osc.freq(currentFreq);
     osc.amp(0.4, 0.05);
     lastStepTime = millis();
-    toggleBtn.html('■ STOP');
+    toggleBtn.html('■ Stop');
     toggleBtn.style('background', '#fff');
     toggleBtn.style('color', '#000');
   } else {
     playing = false;
     osc.amp(0, 0.1);
-    toggleBtn.html('▶ START');
+    toggleBtn.html('▶ Start');
     toggleBtn.style('background', '#000');
     toggleBtn.style('color', '#fff');
   }

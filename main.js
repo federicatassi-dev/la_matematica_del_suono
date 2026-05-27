@@ -63,7 +63,6 @@
 
   var btnPrev = document.getElementById('btn-nav-prev');
   var btnNext = document.getElementById('btn-nav-next');
-  var navTitle = document.getElementById('nav-tool-title');
 
   /* ── SPA Router Navigation ─────────────────────────── */
   function navigateTo(index) {
@@ -85,7 +84,6 @@
       toolTitle.textContent = mod.title;
       toolFormula.textContent = mod.formula;
       toolDesc.textContent = mod.description;
-      navTitle.textContent = mod.title;
 
       // Reset params pane pending new updates from iframe
       toolParamsContent.innerHTML = '<div class="param-row"><span class="param-label" style="font-style: italic;">In attesa di interazione...</span></div>';

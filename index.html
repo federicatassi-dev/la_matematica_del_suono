@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>La Matematica del Suono</title>
+  <title>La Matematica della musica</title>
   <style>
     /* ── Reset & Typography (Swiss Minimalist) ────────── */
     *, *::before, *::after {
@@ -57,7 +57,6 @@
     .logo-text {
       font-size: 2.2rem;
       font-weight: 700;
-      letter-spacing: -0.03em;
       line-height: 1.1;
       text-transform: none;
     }
@@ -89,8 +88,6 @@
       color: #fff;
       font-size: 0.75rem;
       font-weight: 700;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
     }
 
     .index-table-header div {
@@ -130,7 +127,6 @@
     .index-cell.title {
       font-weight: 700;
       font-size: 1.2rem;
-      letter-spacing: -0.02em;
     }
 
     .index-cell.formula {
@@ -154,7 +150,7 @@
     /* ── VIEW 2: TOOL DETAIL PAGE ──────────────────────── */
     .tool-navbar {
       display: grid;
-      grid-template-columns: 280px 1fr 280px;
+      grid-template-columns: 1fr 1fr;
       border-bottom: 1px solid #000;
       background: #fff;
       height: 64px;
@@ -165,7 +161,6 @@
       align-items: center;
       font-size: 0.85rem;
       font-weight: 700;
-      text-transform: uppercase;
       color: #000;
       text-decoration: none;
       cursor: pointer;
@@ -189,16 +184,8 @@
       left: 15px; /* Freccia all'esterno */
     }
 
-    .nav-title {
-      align-self: center;
-      text-align: center;
-      font-weight: 700;
-      font-size: 1.1rem;
-      letter-spacing: -0.02em;
-    }
-
     .nav-btn.next-btn {
-      border-left: 1px solid #000;
+      border-left: none;
       padding-right: 40px; /* Testo allineato a 40px dal bordo destro */
       justify-content: flex-end;
     }
@@ -250,15 +237,14 @@
     }
 
     .tool-box-title {
-      font-size: 1.4rem;
+      font-size: 2.2rem;
       font-weight: 700;
       margin-bottom: 12px;
-      letter-spacing: -0.02em;
     }
 
     .tool-box-formula {
       font-family: monospace;
-      font-size: 0.95rem;
+      font-size: 1.3rem;
       font-weight: 700;
       color: #000;
       margin-bottom: 20px;
@@ -268,8 +254,8 @@
     }
 
     .tool-box-desc {
-      font-size: 0.95rem;
-      color: #333;
+      font-size: 0.9rem;
+      color: #666;
       line-height: 1.65 !important;
     }
 
@@ -281,11 +267,9 @@
     }
 
     .tool-params-title {
-      font-size: 0.75rem;
+      font-size: 1.15rem;
       font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: #666;
+      color: #000;
       margin-bottom: 16px;
       border-bottom: 1px solid #eee;
       padding-bottom: 6px;
@@ -346,7 +330,7 @@
     <!-- Header -->
     <header class="main-header">
       <div class="header-col">
-        <h1 class="logo-text">Matematica e suono</h1>
+        <h1 class="logo-text">La Matematica della musica</h1>
       </div>
       <div class="header-col">
         <p class="header-desc">Esplorazione interattiva dei modelli fisici e matematici sottostanti alla teoria musicale e all'acustica.</p>
@@ -370,7 +354,6 @@
     <div id="tool-view" class="page-view">
       <nav class="tool-navbar">
         <div id="btn-nav-prev" class="nav-btn back-btn">&larr; Precedente</div>
-        <div id="nav-tool-title" class="nav-title">Nome Strumento</div>
         <div id="btn-nav-next" class="nav-btn next-btn">Successivo &rarr;</div>
       </nav>
 
@@ -390,7 +373,7 @@
             <p id="tool-info-desc" class="tool-box-desc">Descrizione</p>
           </div>
           <div class="tool-params-box">
-            <div class="tool-params-title">Pannello Parametri</div>
+            <div class="tool-params-title">Pannello parametri</div>
             <div id="tool-params-content" class="tool-params-content">
               <div class="param-row"><span class="param-label" style="font-style: italic;">In attesa di interazione...</span></div>
             </div>
