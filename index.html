@@ -321,6 +321,48 @@
         border-bottom: 1px solid #000;
       }
     }
+
+    /* ── Bibliografia ──────────────────────────────────── */
+    .bibliography-section {
+      padding: 40px;
+      background: #fff;
+      border-top: 1px solid #000;
+    }
+
+    .bibliography-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 24px;
+    }
+
+    .bibliography-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .bibliography-list li {
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .bib-author {
+      font-weight: 700;
+      color: #000;
+    }
+
+    .bib-link {
+      color: #666;
+      text-decoration: none;
+      word-break: break-all;
+      font-size: 0.85rem;
+    }
+
+    .bib-link:hover {
+      text-decoration: underline;
+      color: #000;
+    }
   </style>
 </head>
 <body>
@@ -347,6 +389,24 @@
       </div>
       <div id="index-rows-container">
         <!-- Generato dinamicamente da main.js -->
+      </div>
+      
+      <div class="bibliography-section">
+        <h3 class="bibliography-title">Bibliografia</h3>
+        <ul class="bibliography-list">
+          <li>
+            <span class="bib-author">La La Lab – The mathematics of music / exhibition booklet Imaginary</span><br>
+            <a href="https://www.imaginary.org/sites/default/files/20190911-lala-booklet-v0.4-web-text.pdf" target="_blank" class="bib-link">https://www.imaginary.org/sites/default/files/20190911-lala-booklet-v0.4-web-text.pdf</a>
+          </li>
+          <li>
+            <span class="bib-author">The guitar wizard</span><br>
+            <a href="https://theguitarwizard.com/intervalli.html" target="_blank" class="bib-link">https://theguitarwizard.com/intervalli.html</a>
+          </li>
+          <li>
+            <span class="bib-author">Musicologica</span><br>
+            <a href="https://www.musicologica.it/vedere-larmonia-il-suono-si-fa-forma/" target="_blank" class="bib-link">https://www.musicologica.it/vedere-larmonia-il-suono-si-fa-forma/</a>
+          </li>
+        </ul>
       </div>
     </div>
 

@@ -1,6 +1,5 @@
 // ── Dissonanza – Curve di Helmholtz con Parziali Spread ──
 
-let spreadSlider;
 let valSpread;
 let partialsRadio;
 let dissonanceCurve = [];
@@ -16,12 +15,12 @@ let plotW, plotH;
 let lastSentHTML = '';
 
 const consonances = [
-  { name: 'Unisono',    ratio: 1/1 },
-  { name: 'Terza min',  ratio: 6/5 },
-  { name: 'Terza mag',  ratio: 5/4 },
-  { name: 'Quarta',     ratio: 4/3 },
-  { name: 'Quinta',     ratio: 3/2 },
-  { name: 'Ottava',     ratio: 2/1 }
+  { name: 'Unisono',     ratio: 1/1 },
+  { name: 'Seconda min', ratio: 16/15 },
+  { name: 'Terza mag',   ratio: 5/4 },
+  { name: 'Quarta',      ratio: 4/3 },
+  { name: 'Quinta',      ratio: 3/2 },
+  { name: 'Ottava',      ratio: 2/1 }
 ];
 
 function plompLevelt(f1, f2) {
@@ -50,7 +49,7 @@ function totalDissonance(r, a, numPartials) {
 }
 
 function buildCurve() {
-  let a = spreadSlider.value();
+  let a = 1.0;
   let numP = parseInt(partialsRadio.value()) || 6;
   dissonanceCurve = [];
   let steps = 400; // Ottimizzato per 800px di larghezza
@@ -93,17 +92,7 @@ function setup() {
   partialsRadio.class('p5-radio-wrapper');
   partialsRadio.input(() => { buildCurve(); updateParentParams(); });
 
-  // Slider bottom
-  let row1 = createDiv('').class('control-row').parent('sliders-container');
-  createDiv('Spread (a)').class('control-label').parent(row1);
-  spreadSlider = createSlider(1.0, 1.3, 1.0, 0.01).parent(row1);
-  valSpread = createDiv('1.00').class('control-value').parent(row1);
-  spreadSlider.input(() => { 
-    valSpread.html(nf(spreadSlider.value(), 1, 2)); 
-    buildCurve(); 
-    updateParentParams(); 
-  });
-
+  // Slider bottom (spreadSlider removed)
   plotW = width - mLeft - mRight;
   plotH = height - mTop - mBottom;
 
@@ -174,7 +163,8 @@ function draw() {
   }
 
   // Consonances
-  for (let c of consonances) {
+  for (let idx = 0; idx < consonances.length; idx++) {
+    let c = consonances[idx];
     let x = map(c.ratio, 1.0, 2.0, mLeft, mLeft + plotW);
     stroke(180);
     strokeWeight(1);
@@ -185,7 +175,8 @@ function draw() {
     fill(100);
     textAlign(CENTER, BOTTOM);
     textSize(9);
-    text(c.name, x, mTop - 5);
+    let yOffset = (idx % 2 === 0) ? -5 : -18;
+    text(c.name, x, mTop + yOffset);
   }
 
   // Curve
@@ -203,7 +194,7 @@ function draw() {
   // Interactive Cursor
   let mx = constrain(mouseX, mLeft, mLeft + plotW);
   let cursorRatio = map(mx, mLeft, mLeft + plotW, 1.0, 2.0);
-  let a = spreadSlider.value();
+  let a = 1.0;
   let numP = parseInt(partialsRadio.value()) || 6;
   let cursorD = totalDissonance(cursorRatio, a, numP);
   let dotX = mx;
